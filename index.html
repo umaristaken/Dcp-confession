@@ -3,188 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCP Confessions</title>
+    <title>DCP Confession page</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 16px;
-        }
-
-        .card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 16px;
-            padding: 32px 24px;
-            width: 100%;
-            max-width: 420px;
-            text-align: center;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo-circle {
-            width: 64px;
-            height: 64px;
-            background-color: #2563eb;
-            color: #ffffff;
-            font-size: 28px;
-            font-weight: bold;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px auto;
-        }
-
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        p.subtitle {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
-
-        .btn-google {
-            width: 100%;
             background-color: #ffffff;
-            color: #0f172a;
-            border: none;
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-
-        .btn-google:active {
-            transform: scale(0.98);
+        .chat-bubble-me {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            border-radius: 18px 4px 18px 18px;
         }
-
-        .btn-google svg {
-            width: 20px;
-            height: 20px;
+        .chat-bubble-other {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            border-radius: 4px 18px 18px 18px;
         }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .status-msg {
-            margin-top: 16px;
-            font-size: 13px;
-            color: #38bdf8;
-        }
-
-        textarea {
-            width: 100%;
-            height: 120px;
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            color: #fff;
-            padding: 12px;
-            font-size: 14px;
-            resize: none;
-            margin-bottom: 16px;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .btn-logout {
-            margin-top: 16px;
-            background: transparent;
-            border: none;
-            color: #ef4444;
-            font-size: 13px;
-            cursor: pointer;
-            text-decoration: underline;
+        .bottom-nav {
+            background-color: #ffffff;
+            border-top: 2px solid #000000;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between bg-white text-black">
 
-    <!-- LOGIN SCREEN -->
-    <div id="login-screen" class="card">
-        <div class="logo-circle">D</div>
-        <h1>Welcome to DCP Confessions</h1>
-        <p class="subtitle">Sign in with Google to get started. Your identity will remain completely anonymous.</p>
-        
-        <button id="btn-login" class="btn-google">
-            <svg viewBox="0 0 24 24">
+    <!-- ==================== SCREEN 1: LOGIN ==================== -->
+    <div id="screen-login" class="flex-1 flex flex-col items-center justify-center p-6 text-center max-w-md mx-auto w-full">
+        <div class="w-20 h-20 bg-black text-white rounded-full flex items-center justify-center font-bold text-3xl shadow-lg mb-6 border-2 border-black">
+            D
+        </div>
+        <h2 class="text-2xl font-bold text-black mb-2">Welcome to DCP Confessions</h2>
+        <p class="text-sm text-gray-600 mb-8">Sign in with Google to join the community chat.</p>
+
+        <button id="btn-login" class="w-full bg-white border-2 border-black text-black font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-3 hover:bg-gray-100 shadow-sm transition">
+            <svg class="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
             </svg>
-            Continue with Google
+            Sign in with Google
         </button>
-
-        <p id="status-msg" class="status-msg hidden">Signing in...</p>
+        <p id="status-msg" class="text-xs text-blue-600 mt-3 hidden">Logging in...</p>
     </div>
 
-    <!-- MAIN APP SCREEN -->
-    <div id="app-screen" class="card hidden">
-        <div class="logo-circle">D</div>
-        <h1>Post a Confession</h1>
-        <p class="subtitle">Write your confession below. It will be posted anonymously.</p>
+    <!-- ==================== SCREEN 2: GENDER & AGE ==================== -->
+    <div id="screen-gender-age" class="flex-1 flex flex-col items-center justify-center p-6 max-w-md mx-auto w-full hidden">
+        <h2 class="text-xl font-bold text-black mb-6 text-center">What is your gender?</h2>
+        
+        <!-- Gender Selection -->
+        <div class="grid grid-cols-2 gap-4 w-full mb-8">
+            <button type="button" onclick="selectGender('Male')" id="gender-male" class="gender-btn border-2 border-black rounded-2xl p-5 flex flex-col items-center justify-center hover:bg-gray-100 transition">
+                <i class="fa-solid fa-mars text-4xl text-black mb-2"></i>
+                <span class="font-bold text-black">Male</span>
+            </button>
+            <button type="button" onclick="selectGender('Female')" id="gender-female" class="gender-btn border-2 border-black rounded-2xl p-5 flex flex-col items-center justify-center hover:bg-gray-100 transition">
+                <i class="fa-solid fa-venus text-4xl text-black mb-2"></i>
+                <span class="font-bold text-black">Female</span>
+            </button>
+        </div>
 
-        <textarea id="confession-text" placeholder="Type your confession here..."></textarea>
-        <button id="btn-submit" class="btn-submit">Submit Confession</button>
+        <!-- Age Scroll / Slider -->
+        <div class="w-full mb-8">
+            <div class="flex justify-between items-center mb-2">
+                <label class="font-bold text-black text-sm">Set your age:</label>
+                <span id="age-value" class="text-lg font-bold text-black">18 yrs</span>
+            </div>
+            <input id="age-range" type="range" min="13" max="80" value="18" oninput="document.getElementById('age-value').innerText = this.value + ' yrs'" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-black">
+        </div>
 
-        <button id="btn-logout" class="btn-logout">Sign Out</button>
+        <button onclick="goToScreen3()" class="w-full bg-black text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition">
+            Next Step <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
     </div>
 
-    <!-- FIREBASE SDK -->
+    <!-- ==================== SCREEN 3: REAL NAME WARNING ==================== -->
+    <div id="screen-name" class="flex-1 flex flex-col items-center justify-center p-6 max-w-md mx-auto w-full hidden">
+        <h2 class="text-xl font-bold text-black mb-2 text-center">What is your real name?</h2>
+        
+        <!-- Red Warning Message -->
+        <p class="text-xs font-bold text-red-600 bg-red-50 border-2 border-red-500 p-3 rounded-xl mb-6 text-center w-full">
+            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Take your real name otherwise you will get banned
+        </p>
+
+        <div class="w-full mb-6">
+            <input id="real-name-input" type="text" placeholder="Enter your full real name..." class="w-full bg-white border-2 border-black rounded-xl px-4 py-3 text-sm text-black focus:outline-none transition">
+        </div>
+
+        <button onclick="finishOnboarding()" class="w-full bg-black text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition">
+            Continue to Chat <i class="fa-solid fa-check ml-2"></i>
+        </button>
+    </div>
+
+    <!-- ==================== SCREEN 4: CHAT INTERFACE ==================== -->
+    <div id="screen-chat" class="flex-1 flex flex-col w-full hidden">
+        
+        <!-- TOP NAV HEADER -->
+        <nav class="bg-white sticky top-0 z-40 px-4 py-3 border-b-2 border-black flex items-center justify-center shadow-sm">
+            <h1 class="text-black font-extrabold text-xl tracking-wide">DCP Confession page</h1>
+        </nav>
+
+        <!-- CHAT MESSAGES CONTAINER -->
+        <div class="flex-1 max-w-md w-full mx-auto px-4 pt-4 pb-36">
+            <div id="chat-stream" class="space-y-4">
+                <div class="text-center py-8 text-gray-500 text-sm">Loading group chat...</div>
+            </div>
+        </div>
+
+        <!-- FIXED INPUT & 5-BOX BOTTOM NAV -->
+        <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 border-black">
+            
+            <!-- Chat Input Box -->
+            <div class="max-w-md mx-auto px-3 py-2 flex items-center gap-2">
+                <div class="flex-1 bg-white border-2 border-black rounded-2xl px-4 py-2.5 flex items-center">
+                    <input id="chat-input" type="text" placeholder="Message..." class="w-full bg-transparent text-base text-black font-medium focus:outline-none placeholder-gray-500">
+                </div>
+                <button id="btn-send" class="bg-black text-white border-2 border-black px-4 py-2.5 rounded-2xl font-bold">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <!-- 5-BOX BOTTOM NAVIGATION -->
+            <div class="bottom-nav">
+                <div class="max-w-md mx-auto grid grid-cols-5 border-t-2 border-black text-center text-black font-bold">
+                    
+                    <!-- Box 1: Me -->
+                    <button onclick="openModal('me-modal')" class="py-2 border-r-2 border-black hover:bg-gray-100 flex flex-col items-center justify-center">
+                        <span class="text-sm">Me</span>
+                    </button>
+
+                    <!-- Box 2: Personal -->
+                    <button onclick="openModal('personal-modal')" class="py-2 border-r-2 border-black hover:bg-gray-100 flex flex-col items-center justify-center">
+                        <span class="text-[10px] leading-tight">Personal</span>
+                        <span class="text-xs">...</span>
+                    </button>
+
+                    <!-- Box 3: Active Users -->
+                    <div class="py-2 border-r-2 border-black flex flex-col items-center justify-center">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-[10px] leading-tight">User active</span>
+                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        </div>
+                        <span id="active-user-count" class="text-sm">1</span>
+                    </div>
+
+                    <!-- Box 4: Setting -->
+                    <button onclick="openModal('settings-modal')" class="py-2 border-r-2 border-black hover:bg-gray-100 flex flex-col items-center justify-center">
+                        <span class="text-sm">Setting</span>
+                        <span class="text-xs">O</span>
+                    </button>
+
+                    <!-- Box 5: Notice -->
+                    <button onclick="openModal('notice-modal')" class="py-2 hover:bg-gray-100 flex flex-col items-center justify-center">
+                        <span class="text-sm">Notice</span>
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Me Modal -->
+    <div id="me-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white border-2 border-black rounded-2xl p-5 w-full max-w-xs text-center relative shadow-2xl">
+            <button onclick="closeModal('me-modal')" class="absolute top-3 right-3 text-black font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-base font-bold text-black mb-4"><i class="fa-solid fa-user text-black mr-2"></i>My Profile</h3>
+            <div class="space-y-2 text-sm text-black">
+                <div class="bg-gray-100 p-3 rounded-xl border border-black text-left space-y-1">
+                    <p><strong>Name:</strong> <span id="profile-name">-</span></p>
+                    <p><strong>Gender:</strong> <span id="profile-gender">-</span></p>
+                    <p><strong>Age:</strong> <span id="profile-age">-</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Modal -->
+    <div id="personal-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white border-2 border-black rounded-2xl p-5 w-full max-w-xs text-center relative shadow-2xl">
+            <button onclick="closeModal('personal-modal')" class="absolute top-3 right-3 text-black font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="w-12 h-12 rounded-full bg-black text-white font-bold text-xl flex items-center justify-center mx-auto mb-3 shadow-md border-2 border-black">D</div>
+            <h3 class="text-base font-bold text-black mb-2">Personal Contact</h3>
+            <div class="bg-yellow-100 border-2 border-black p-3 rounded-xl flex items-center justify-center space-x-2 text-black font-bold text-sm">
+                <i class="fa-brands fa-snapchat text-black text-lg"></i>
+                <span>:@callmedefault</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white border-2 border-black rounded-2xl p-5 w-full max-w-xs text-center relative shadow-2xl">
+            <button onclick="closeModal('settings-modal')" class="absolute top-3 right-3 text-black font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-base font-bold text-black mb-4"><i class="fa-solid fa-gear mr-2"></i>Settings</h3>
+            <button id="btn-logout" class="w-full bg-red-100 border-2 border-black text-red-600 font-bold py-2.5 px-4 rounded-xl hover:bg-red-200 transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+            </button>
+        </div>
+    </div>
+
+    <!-- Notice Modal -->
+    <div id="notice-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white border-2 border-black rounded-2xl p-5 w-full max-w-xs text-center relative shadow-2xl">
+            <button onclick="closeModal('notice-modal')" class="absolute top-3 right-3 text-black font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="w-10 h-10 bg-yellow-200 text-black rounded-full flex items-center justify-center mx-auto mb-3 border border-black">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+            </div>
+            <h3 class="text-base font-bold text-black mb-2">Notice & Rules</h3>
+            <p class="text-xs text-red-600 bg-red-50 border-2 border-red-500 p-3 rounded-xl leading-relaxed font-bold">
+                Agar aap ne vulgar language use ki ya fake name lagaya to ban kar diye jao ge.
+            </p>
+        </div>
+    </div>
+
+    <!-- FIREBASE SCRIPT WITH LOOP FIX -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { 
             getAuth, 
-            signInWithRedirect, 
-            getRedirectResult, 
+            signInWithPopup, 
             GoogleAuthProvider, 
-            onAuthStateChanged,
+            onAuthStateChanged, 
             signOut 
         } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { 
+            getFirestore, 
+            collection, 
+            addDoc, 
+            onSnapshot, 
+            query, 
+            orderBy, 
+            serverTimestamp 
+        } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBIeniPKF4jMcLOK7N4qKVa3SeKUPPjCoI",
             authDomain: "dcp-confession.firebaseapp.com",
@@ -195,74 +257,173 @@
             measurementId: "G-YBYVLFJ241"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        const loginScreen = document.getElementById('login-screen');
-        const appScreen = document.getElementById('app-screen');
+        let currentUser = null;
+        let userGender = localStorage.getItem('dcp_gender') || "";
+        let userRealName = localStorage.getItem('dcp_name') || "";
+        let userAge = localStorage.getItem('dcp_age') || "18";
+
+        const screenLogin = document.getElementById('screen-login');
+        const screenGenderAge = document.getElementById('screen-gender-age');
+        const screenName = document.getElementById('screen-name');
+        const screenChat = document.getElementById('screen-chat');
+
         const btnLogin = document.getElementById('btn-login');
         const btnLogout = document.getElementById('btn-logout');
+        const btnSend = document.getElementById('btn-send');
         const statusMsg = document.getElementById('status-msg');
-        const btnSubmit = document.getElementById('btn-submit');
-        const confessionText = document.getElementById('confession-text');
+        const chatInput = document.getElementById('chat-input');
+        const chatStream = document.getElementById('chat-stream');
 
-        // Handle Login Redirect Result
-        getRedirectResult(auth)
-            .then((result) => {
-                if (result) {
-                    console.log("Successfully logged in:", result.user);
-                }
-            })
-            .catch((error) => {
-                console.error("Login Error:", error);
-            });
-
-        // Trigger Google Sign-In
+        // Google Popup Login Fix
         btnLogin.addEventListener('click', () => {
             statusMsg.classList.remove('hidden');
-            signInWithRedirect(auth, provider);
+            signInWithPopup(auth, provider)
+                .catch((err) => {
+                    alert("Login failed: " + err.message);
+                    statusMsg.classList.add('hidden');
+                });
         });
 
-        // Track Auth State
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loginScreen.classList.add('hidden');
-                appScreen.classList.remove('hidden');
-            } else {
-                loginScreen.classList.remove('hidden');
-                appScreen.classList.add('hidden');
-            }
-        });
-
-        // Sign Out
         btnLogout.addEventListener('click', () => {
+            closeModal('settings-modal');
+            localStorage.clear();
             signOut(auth);
         });
 
-        // Post Confession
-        btnSubmit.addEventListener('click', async () => {
-            const text = confessionText.value.trim();
-            if (!text) {
-                alert("Please enter a confession.");
-                return;
+        // Loop-proof auth listener
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            statusMsg.classList.add('hidden');
+            if (user) {
+                if (!userGender) {
+                    showScreen(screenGenderAge);
+                } else if (!userRealName) {
+                    showScreen(screenName);
+                } else {
+                    updateProfileModal();
+                    showScreen(screenChat);
+                    loadMessages();
+                }
+            } else {
+                showScreen(screenLogin);
             }
+        });
 
+        function showScreen(screen) {
+            [screenLogin, screenGenderAge, screenName, screenChat].forEach(s => s.classList.add('hidden'));
+            screen.classList.remove('hidden');
+        }
+
+        window.selectGender = (gender) => {
+            userGender = gender;
+            document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('bg-black', 'text-white'));
+            if (gender === 'Male') {
+                document.getElementById('gender-male').classList.add('bg-black', 'text-white');
+            } else {
+                document.getElementById('gender-female').classList.add('bg-black', 'text-white');
+            }
+        };
+
+        window.goToScreen3 = () => {
+            if (!userGender) return alert("Please select your gender!");
+            userAge = document.getElementById('age-range').value;
+            localStorage.setItem('dcp_gender', userGender);
+            localStorage.setItem('dcp_age', userAge);
+            showScreen(screenName);
+        };
+
+        window.finishOnboarding = () => {
+            const name = document.getElementById('real-name-input').value.trim();
+            if (!name) return alert("Please enter your real name!");
+            userRealName = name;
+            localStorage.setItem('dcp_name', userRealName);
+            updateProfileModal();
+            showScreen(screenChat);
+            loadMessages();
+        };
+
+        function updateProfileModal() {
+            document.getElementById('profile-name').innerText = userRealName || currentUser?.displayName || "Anonymous";
+            document.getElementById('profile-gender').innerText = userGender || "Not set";
+            document.getElementById('profile-age').innerText = (userAge || "18") + " yrs";
+        }
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        btnSend.addEventListener('click', sendMessage);
+
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            chatInput.value = '';
             try {
                 await addDoc(collection(db, "confessions"), {
                     text: text,
+                    userId: currentUser ? currentUser.uid : "anonymous",
+                    senderName: userRealName || "Anonymous",
                     timestamp: serverTimestamp()
                 });
-                alert("Confession posted successfully!");
-                confessionText.value = "";
-            } catch (err) {
-                console.error("Error submitting:", err);
-                alert("Error posting confession: " + err.message);
+            } catch (e) {
+                alert("Error sending message: " + e.message);
             }
-        });
+        }
+
+        function loadMessages() {
+            const q = query(collection(db, "confessions"), orderBy("timestamp", "asc"));
+            onSnapshot(q, (snapshot) => {
+                chatStream.innerHTML = '';
+                if (snapshot.empty) {
+                    chatStream.innerHTML = '<div class="text-center py-6 text-gray-400 text-xs">No messages yet. Say hi!</div>';
+                    return;
+                }
+
+                snapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const isMe = currentUser && data.userId === currentUser.uid;
+
+                    const msgRow = document.createElement('div');
+                    msgRow.className = `flex items-center space-x-2 ${isMe ? 'justify-end' : 'justify-start'} mb-3`;
+
+                    if (isMe) {
+                        msgRow.innerHTML = `
+                            <div class="chat-bubble-me px-4 py-2 text-base font-semibold max-w-[80%] shadow-sm">
+                                <span>${escapeHtml(data.text)}</span>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-black text-white font-bold flex items-center justify-center text-sm border-2 border-black flex-shrink-0">
+                                D
+                            </div>
+                        `;
+                    } else {
+                        msgRow.innerHTML = `
+                            <div class="w-8 h-8 rounded-full bg-black text-white font-bold flex items-center justify-center text-sm border-2 border-black flex-shrink-0">
+                                ?
+                            </div>
+                            <div class="chat-bubble-other px-4 py-2 text-base font-semibold max-w-[80%] shadow-sm">
+                                <span>${escapeHtml(data.text)}</span>
+                            </div>
+                        `;
+                    }
+                    
+                    chatStream.appendChild(msgRow);
+                });
+
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+        }
+
+        function escapeHtml(str) {
+            return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : '';
+        }
+
+        window.openModal = (id) => document.getElementById(id).classList.remove('hidden');
+        window.closeModal = (id) => document.getElementById(id).classList.add('hidden');
     </script>
 </body>
-            </html>
-            
+</html>

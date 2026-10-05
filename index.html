@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCP Confessions</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for stylish "D" logo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .glass-card { background: rgba(22, 27, 34, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(48, 54, 61, 0.7); }
+    /* Stylish Logo Font */
+    .brand-avatar-font { font-family: 'Montserrat', sans-serif; }
+    /* My Message: Right side & Light Blue */
+    .chat-bubble-me { background-color: #2563eb; color: #ffffff; border-bottom-right-radius: 2px; }
+    /* Others Message: Left side & Light Gray */
+    .chat-bubble-others { background-color: #21262d; color: #c9d1d9; border-bottom-left-radius: 2px; border: 1px solid #30363d; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+  <!-- App Container -->
+  <div class="w-full max-w-md glass-card rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[85vh] max-h-[700px] relative">
+    
+    <!-- Header -->
+    <div class="bg-[#161b22] border-b border-[#30363d] p-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <!-- AVATAR - Click to view personal User ID -->
+        <button id="me-avatar-btn" class="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center shadow-sm shrink-0 cursor-pointer hover:opacity-90 transition">
+          <span class="brand-avatar-font text-[#1e3a8a] font-extrabold text-xl leading-none">D</span>
+        </button>
+
+        <div>
+          <h1 class="text-base font-semibold text-white leading-tight">DCP Confessions</h1>
+          <p class="text-xs text-gray-400 font-medium">Owner: DEFAULT</p>
+        </div>
+      </div>
+
+      <!-- Header Action Buttons -->
+      <div id="user-profile" class="hidden flex items-center space-x-2">
+        <button id="private-chat-toggle-btn" class="p-2 text-blue-400 hover:text-white transition rounded-lg hover:bg-gray-800" title="Personal Chats">
+          <i class="fa-solid fa-comments text-lg"></i>
+        </button>
+        <button id="open-settings-btn" class="p-2 text-gray-400 hover:text-white transition rounded-lg hover:bg-gray-800" title="Settings">
+          <i class="fa-solid fa-gear text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="flex-1 flex flex-col justify-between p-4 overflow-y-auto" id="app-body">
+      
+      <!-- STEP 1: AUTHENTICATION -->
+      <div id="step-auth" class="flex flex-col items-center justify-center h-full text-center py-8">
+        <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-4 shadow-md">
+          <span class="brand-avatar-font text-[#1e3a8a] font-extrabold text-3xl">D</span>
+        </div>
+        <h2 class="text-xl font-bold text-white mb-2">Welcome to DCP Confessions</h2>
+        <p class="text-sm text-gray-400 mb-6 max-w-xs">Sign in with Google to get started. Your identity will remain completely anonymous.</p>
+        
+        <button id="google-login-btn" class="w-full py-3 px-4 bg-white text-gray-900 rounded-xl font-semibold flex items-center justify-center space-x-3 hover:bg-gray-100 transition shadow-lg">
+          <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          <span>Continue with Google</span>
+        </button>
+      </div>
+
+      <!-- STEP 2: ONBOARDING DETAILS -->
+      <div id="step-onboarding" class="hidden flex flex-col justify-center h-full space-y-4 py-4">
+        <div class="text-center mb-2">
+          <h2 class="text-lg font-bold text-white">Complete Your Profile</h2>
+          <p class="text-xs text-gray-400">Enter your details to proceed.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-gray-400 mb-1">Your Full Name</label>
+          <input type="text" id="user-fullname" class="w-full bg-[#161b22] border border-[#30363d] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500" placeholder="e.g. Rahul Sharma">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-gray-400 mb-1">Your Batch/Year</label>
+          <select id="user-batch" class="w-full bg-[#161b22] border border-[#30363d] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="Passout">Passout / Alumni</option>
+          </select>
+        </div>
+
+        <button id="save-onboarding-btn" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold transition mt-2">
+          Start Writing Confessions <i class="fa-solid fa-arrow-right ml-1"></i>
+        </button>
+      </div>
+
+      <!-- STEP 3: MAIN CHAT / CONFESSION INTERFACE -->
+      <div id="step-chat" class="hidden flex-1 flex flex-col justify-between h-full">
+        <!-- Messages Box -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto space-y-3 pr-1 py-2 mb-3">
+          <div class="flex items-start space-x-2">
+            <div class="w-7 h-7 rounded-full bg-white border border-gray-300 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+              <span class="brand-avatar-font text-[#1e3a8a] font-extrabold text-xs">D</span>
+            </div>
+            <div class="chat-bubble-others p-3 rounded-2xl max-w-[80%] text-xs">
+              👋 Welcome to DCP Confessions! Share your thoughts or confessions below anonymously.
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Box -->
+        <div class="border-t border-[#30363d] pt-3">
+          <form id="send-confession-form" class="flex items-center space-x-2">
+            <input type="text" id="confession-input" class="flex-1 bg-[#161b22] border border-[#30363d] rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500" placeholder="Type your confession..." required>
+            <button type="submit" class="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition">
+              <i class="fa-solid fa-paper-plane text-sm"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- STEP 4: PERSONAL / PRIVATE CHATS SECTION -->
+      <div id="step-private-chat" class="hidden flex-1 flex flex-col justify-between h-full">
+        <div class="flex items-center justify-between border-b border-[#30363d] pb-2 mb-2">
+          <span class="text-xs font-semibold text-blue-400 flex items-center">
+            <i class="fa-solid fa-lock mr-1.5"></i> Personal Anonymous Chat
+          </span>
+          <button id="back-to-public-btn" class="text-xs text-gray-400 hover:text-white">
+            <i class="fa-solid fa-arrow-left mr-1"></i> Public Chat
+          </button>
+        </div>
+
+        <div id="private-messages-list" class="flex-1 overflow-y-auto space-y-3 py-2">
+          <div class="text-center text-xs text-gray-500 my-4">Select or start a private chat with a user Tag (e.g. user#12)</div>
+        </div>
+
+        <div class="border-t border-[#30363d] pt-3">
+          <form id="send-private-form" class="flex items-center space-x-2">
+            <input type="text" id="private-recipient-id" class="w-24 bg-[#161b22] border border-[#30363d] rounded-xl px-2.5 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500" placeholder="user#ID" required>
+            <input type="text" id="private-msg-input" class="flex-1 bg-[#161b22] border border-[#30363d] rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500" placeholder="Message..." required>
+            <button type="submit" class="p-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition">
+              <i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SETTINGS MODAL / POPUP -->
+    <div id="settings-modal" class="hidden absolute inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-50">
+      <div class="bg-[#161b22] border border-[#30363d] w-full rounded-2xl p-5 space-y-4 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-[#30363d] pb-3">
+          <h3 class="text-base font-bold text-white flex items-center">
+            <i class="fa-solid fa-sliders mr-2 text-blue-400"></i> Settings & Personal
+          </h3>
+          <button id="close-settings-btn" class="text-gray-400 hover:text-white p-1">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Snapchat Link Option -->
+        <a href="https://snapchat.com/add/callmedefault" target="_blank" class="w-full bg-[#fffc00] text-black rounded-xl p-3 flex items-center justify-between font-bold text-xs shadow hover:opacity-90 transition">
+          <div class="flex items-center space-x-2">
+            <i class="fa-brands fa-snapchat text-base"></i>
+            <span>Snapchat: @callmedefault</span>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </a>
+
+        <!-- Rules & Privacy Info -->
+        <div class="space-y-2 text-xs text-gray-300">
+          <div class="flex items-center space-x-2 bg-[#0d1117]/50 p-2.5 rounded-lg border border-[#30363d]/50">
+            <i class="fa-solid fa-shield-halved text-green-400 text-sm"></i>
+            <span>Your posts are 100% Anonymous to public.</span>
+          </div>
+          <div class="flex items-center space-x-2 bg-[#0d1117]/50 p-2.5 rounded-lg border border-[#30363d]/50">
+            <i class="fa-solid fa-circle-exclamation text-yellow-400 text-sm"></i>
+            <span>Maintain respect; abusive posts will be removed.</span>
+          </div>
+        </div>
+
+        <!-- Logout Button -->
+        <button id="logout-btn" class="w-full py-2.5 bg-red-600/20 hover:bg-red-600/30 text-red-400 border border-red-500/30 rounded-xl font-medium text-xs flex items-center justify-center transition">
+          <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout Account
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FIREBASE SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyD-YOUR-REAL-KEY",
+      authDomain: "dcp-confession.firebaseapp.com",
+      projectId: "dcp-confession",
+      storageBucket: "dcp-confession.appspot.com",
+      messagingSenderId: "103506121104",
+      appId: "1:103506121104:web:YOUR-REAL-APP-ID"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    let currentUser = null;
+    let myUserTag = "";
+
+    // DOM Elements
+    const stepAuth = document.getElementById("step-auth");
+    const stepOnboarding = document.getElementById("step-onboarding");
+    const stepChat = document.getElementById("step-chat");
+    const stepPrivateChat = document.getElementById("step-private-chat");
+    const userProfile = document.getElementById("user-profile");
+    const googleLoginBtn = document.getElementById("google-login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const saveOnboardingBtn = document.getElementById("save-onboarding-btn");
+    const confessionForm = document.getElementById("send-confession-form");
+    const confessionInput = document.getElementById("confession-input");
+    const chatMessages = document.getElementById("chat-messages");
+    const meAvatarBtn = document.getElementById("me-avatar-btn");
+    const privateChatToggleBtn = document.getElementById("private-chat-toggle-btn");
+    const backToPublicBtn = document.getElementById("back-to-public-btn");
+    const sendPrivateForm = document.getElementById("send-private-form");
+    const privateRecipientId = document.getElementById("private-recipient-id");
+    const privateMsgInput = document.getElementById("private-msg-input");
+    const privateMessagesList = document.getElementById("private-messages-list");
+    
+    // Settings Modal Elements
+    const settingsModal = document.getElementById("settings-modal");
+    const openSettingsBtn = document.getElementById("open-settings-btn");
+    const closeSettingsBtn = document.getElementById("close-settings-btn");
+
+    // Open & Close Settings Modal
+    openSettingsBtn.addEventListener("click", () => settingsModal.classList.remove("hidden"));
+    closeSettingsBtn.addEventListener("click", () => settingsModal.classList.add("hidden"));
+
+    // Click Avatar to see personal User ID (Only for current user)
+    meAvatarBtn.addEventListener("click", () => {
+      if (myUserTag) {
+        alert("Your Private ID: " + myUserTag + "\n(This ID is hidden from other users)");
+      }
+    });
+
+    // Toggle Private Chat View
+    privateChatToggleBtn.addEventListener("click", () => {
+      showScreen(stepPrivateChat);
+      loadPrivateMessages();
+    });
+
+    backToPublicBtn.addEventListener("click", () => {
+      showScreen(stepChat);
+    });
+
+    // Google Sign-In
+    googleLoginBtn.addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, provider);
+      } catch (err) {
+        alert("Login failed: " + err.message);
+      }
+    });
+
+    // Logout
+    logoutBtn.addEventListener("click", () => {
+      settingsModal.classList.add("hidden");
+      signOut(auth);
+    });
+
+    // Generate or fetch user tag (e.g. user#1, user#34)
+    function getOrCreateUserTag(uid) {
+      let savedTag = localStorage.getItem("dcp_user_tag_" + uid);
+      if (!savedTag) {
+        const randomNum = Math.floor(Math.random() * 900) + 1;
+        savedTag = "user#" + randomNum;
+        localStorage.setItem("dcp_user_tag_" + uid, savedTag);
+      }
+      return savedTag;
+    }
+
+    // Auth State Changed
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        myUserTag = getOrCreateUserTag(user.uid);
+        userProfile.classList.remove("hidden");
+        
+        // Check if onboarding completed
+        const userDocRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userDocRef);
+
+        if (userSnap.exists()) {
+          showScreen(stepChat);
+          loadConfessions();
+        } else {
+          showScreen(stepOnboarding);
+        }
+      } else {
+        currentUser = null;
+        myUserTag = "";
+        userProfile.classList.add("hidden");
+        showScreen(stepAuth);
+      }
+    });
+
+    // Save Onboarding Info
+    saveOnboardingBtn.addEventListener("click", async () => {
+      const name = document.getElementById("user-fullname").value.trim();
+      const batch = document.getElementById("user-batch").value;
+
+      if (!name) return alert("Please enter your name");
+
+      await setDoc(doc(db, "users", currentUser.uid), {
+        name,
+        batch,
+        userTag: myUserTag,
+        email: currentUser.email,
+        createdAt: serverTimestamp()
+      });
+
+      showScreen(stepChat);
+      loadConfessions();
+    });
+
+    // Send Confession
+    confessionForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const text = confessionInput.value.trim();
+      if (!text) return;
+
+      confessionInput.value = "";
+
+      await addDoc(collection(db, "confessions"), {
+        text,
+        uid: currentUser.uid,
+        userTag: myUserTag,
+        timestamp: serverTimestamp()
+      });
+    });
+
+    // Send Private Message
+    sendPrivateForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const targetTag = privateRecipientId.value.trim();
+      const msgText = privateMsgInput.value.trim();
+
+      if (!targetTag || !msgText) return;
+
+      await addDoc(collection(db, "private_messages"), {
+        senderTag: myUserTag,
+        recipientTag: targetTag,
+        text: msgText,
+        timestamp: serverTimestamp()
+      });
+
+      privateMsgInput.value = "";
+    });
+
+    // Load Real-time Confessions
+    function loadConfessions() {
+      const q = query(collection(db, "confessions"), orderBy("timestamp", "asc"));
+      onSnapshot(q, (snapshot) => {
+        chatMessages.innerHTML = `
+          <div class="flex items-start space-x-2">
+            <div class="w-7 h-7 rounded-full bg-white border border-gray-300 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+              <span class="brand-avatar-font text-[#1e3a8a] font-extrabold text-xs">D</span>
+            </div>
+            <div class="chat-bubble-others p-3 rounded-2xl max-w-[80%] text-xs">
+              👋 Welcome to DCP Confessions! Share your thoughts or confessions below anonymously.
+            </div>
+          </div>
+        `;
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          const isMe = data.uid === currentUser.uid;
+          
+          const wrapper = document.createElement("div");
+          wrapper.className = "flex items-start space-x-2 " + (isMe ? "justify-end" : "");
+
+          const avatarHTML = `
+            <div class="w-7 h-7 rounded-full bg-white border border-gray-300 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+              <span class="brand-avatar-font text-[#1e3a8a] font-extrabold text-xs">D</span>
+            </div>
+          `;
+
+          const bubble = document.createElement("div");
+          bubble.className = `p-3 rounded-2xl max-w-[80%] text-xs ${isMe ? 'chat-bubble-me' : 'chat-bubble-others'}`;
+          bubble.innerText = data.text;
+
+          if (isMe) {
+            wrapper.appendChild(bubble);
+            wrapper.innerHTML += avatarHTML;
+          } else {
+            wrapper.innerHTML += avatarHTML;
+            wrapper.appendChild(bubble);
+          }
+          
+          chatMessages.appendChild(wrapper);
+        });
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      });
+    }
+
+    // Load Private Messages
+    function loadPrivateMessages() {
+      const q = query(collection(db, "private_messages"), orderBy("timestamp", "asc"));
+      onSnapshot(q, (snapshot) => {
+        privateMessagesList.innerHTML = "";
+        let count = 0;
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data.senderTag === myUserTag || data.recipientTag === myUserTag) {
+            count++;
+            const isMe = data.senderTag === myUserTag;
+            const msgCard = document.createElement("div");
+            msgCard.className = `p-2.5 rounded-xl text-xs max-w-[85%] ${isMe ? 'chat-bubble-me ml-auto' : 'chat-bubble-others'}`;
+            msgCard.innerHTML = `<span class="opacity-75 text-[10px] block font-semibold mb-0.5">${isMe ? 'To: ' + data.recipientTag : 'From: ' + data.senderTag}</span>` + data.text;
+            privateMessagesList.appendChild(msgCard);
+          }
+        });
+
+        if (count === 0) {
+          privateMessagesList.innerHTML = `<div class="text-center text-xs text-gray-500 my-4">No private messages yet. Start a chat by entering a user ID above!</div>`;
+        }
+        privateMessagesList.scrollTop = privateMessagesList.scrollHeight;
+      });
+    }
+
+    // Navigation Helper
+    function showScreen(screen) {
+      stepAuth.classList.add("hidden");
+      stepOnboarding.classList.add("hidden");
+      stepChat.classList.add("hidden");
+      stepPrivateChat.classList.add("hidden");
+      screen.classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

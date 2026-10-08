@@ -1,187 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCP Confession page</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background-color: #0b141a;
-            color: #e9edef;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-        /* Dark Doodle Pattern Background */
-        .chat-bg {
-            background-color: #0b141a;
-            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20h4v4h-4zM50 50h4v4h-4zM30 60h2v2h-2zM60 10h2v2h-2z' fill='%2523202c33' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-        .chat-bubble-me {
-            background-color: #ffffff;
-            color: #000000;
-            border-radius: 18px 4px 18px 18px;
-        }
-        .chat-bubble-other {
-            background-color: #ffffff;
-            color: #000000;
-            border-radius: 4px 18px 18px 18px;
-        }
-        .bottom-nav {
-            background-color: #111b21;
-            border-top: 1px solid #222d34;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <title>DCP Confession</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb;
+      color: #111827;
+    }
+
+    .screen {
+      min-height: 100vh;
+    }
+
+    .hidden-screen {
+      display: none !important;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .message-text {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    #messages {
+      scroll-behavior: smooth;
+    }
+
+    input[type="range"] {
+      accent-color: #2563eb;
+    }
+
+    .gender-card {
+      transition: all 0.2s ease;
+    }
+
+    .gender-card.selected {
+      border-color: #2563eb !important;
+      background: #eff6ff;
+      transform: translateY(-1px);
+    }
+
+    .bottom-nav {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .modal-bg {
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    .loader {
+      width: 22px;
+      height: 22px;
+      border: 3px solid #dbeafe;
+      border-top-color: #2563eb;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between chat-bg text-gray-100">
 
-    <!-- ==================== SCREEN 1: LOGIN ==================== -->
-    <div id="screen-login" class="flex-1 flex flex-col items-center justify-center p-6 text-center max-w-md mx-auto w-full">
-        <div class="w-20 h-20 bg-white text-black rounded-full flex items-center justify-center font-bold text-3xl shadow-lg mb-6 border-2 border-black">
-            D
+<body>
+
+  <!-- ========================================================= -->
+  <!-- LOGIN SCREEN -->
+  <!-- ========================================================= -->
+
+  <section id="screen-login" class="screen flex items-center justify-center p-5">
+    <div class="w-full max-w-md">
+
+      <div class="text-center mb-10">
+        <div
+          class="mx-auto mb-5 w-20 h-20 rounded-3xl bg-blue-600 text-white flex items-center justify-center shadow-lg"
+        >
+          <i class="fa-solid fa-comments text-3xl"></i>
         </div>
-        <h2 class="text-2xl font-bold text-white mb-2">Welcome to DCP Confessions</h2>
-        <p class="text-sm text-gray-400 mb-8">Sign in with Google to join the community chat.</p>
 
-        <button id="btn-login" class="w-full bg-white text-black font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-3 hover:bg-gray-200 shadow-sm transition">
-            <svg class="w-5 h-5" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-            </svg>
-            Sign in with Google
+        <h1 class="text-4xl font-black text-gray-900">
+          DCP Confession
+        </h1>
+
+        <p class="text-gray-500 mt-2">
+          Speak. Share. Stay respectful.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-xl p-6">
+
+        <button
+          id="googleLoginBtn"
+          onclick="loginWithGoogle()"
+          class="w-full border border-gray-200 rounded-2xl py-4 px-4 flex items-center justify-center gap-3 font-semibold text-gray-800 hover:bg-gray-50 active:scale-[0.99] transition"
+        >
+          <i class="fa-brands fa-google text-lg"></i>
+          <span id="googleLoginText">Continue with Google</span>
         </button>
-        <p id="status-msg" class="text-xs text-blue-400 mt-3 hidden">Logging in...</p>
-    </div>
 
-    <!-- ==================== SCREEN 2: GENDER & AGE ==================== -->
-    <div id="screen-gender-age" class="flex-1 flex flex-col items-center justify-center p-6 max-w-md mx-auto w-full hidden">
-        <h2 class="text-xl font-bold text-white mb-6 text-center">What is your gender?</h2>
-        
-        <!-- Gender Selection -->
-        <div class="grid grid-cols-2 gap-4 w-full mb-8">
-            <button type="button" onclick="selectGender('Male')" id="gender-male" class="gender-btn border-2 border-gray-600 rounded-2xl p-5 flex flex-col items-center justify-center hover:bg-gray-800 transition">
-                <i class="fa-solid fa-mars text-4xl text-white mb-2"></i>
-                <span class="font-bold text-white">Male</span>
-            </button>
-            <button type="button" onclick="selectGender('Female')" id="gender-female" class="gender-btn border-2 border-gray-600 rounded-2xl p-5 flex flex-col items-center justify-center hover:bg-gray-800 transition">
-                <i class="fa-solid fa-venus text-4xl text-white mb-2"></i>
-                <span class="font-bold text-white">Female</span>
-            </button>
+        <div id="loginError"
+          class="hidden mt-4 p-3 rounded-xl bg-red-50 text-red-700 text-sm">
         </div>
 
-        <!-- Age Scroll / Slider -->
-        <div class="w-full mb-8">
-            <div class="flex justify-between items-center mb-2">
-                <label class="font-bold text-white text-sm">Set your age:</label>
-                <span id="age-value" class="text-lg font-bold text-white">18 yrs</span>
-            </div>
-            <input id="age-range" type="range" min="13" max="80" value="18" oninput="document.getElementById('age-value').innerText = this.value + ' yrs'" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-white">
-        </div>
-
-        <button onclick="goToScreen3()" class="w-full bg-white text-black font-bold py-3 rounded-xl hover:bg-gray-200 transition">
-            Next Step <i class="fa-solid fa-arrow-right ml-2"></i>
-        </button>
-    </div>
-
-    <!-- ==================== SCREEN 3: REAL NAME WARNING ==================== -->
-    <div id="screen-name" class="flex-1 flex flex-col items-center justify-center p-6 max-w-md mx-auto w-full hidden">
-        <h2 class="text-xl font-bold text-white mb-2 text-center">What is your real name?</h2>
-        
-        <!-- Red Warning Message -->
-        <p class="text-xs font-bold text-red-400 bg-red-950/60 border border-red-500 p-3 rounded-xl mb-6 text-center w-full">
-            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Take your real name otherwise you will get banned
+        <p class="text-xs text-gray-400 text-center mt-5">
+          By continuing, you agree to use this community respectfully.
         </p>
 
-        <div class="w-full mb-6">
-            <input id="real-name-input" type="text" placeholder="Enter your full real name..." class="w-full bg-gray-800 border border-gray-600 rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition">
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================= -->
+  <!-- GENDER + AGE SCREEN -->
+  <!-- ========================================================= -->
+
+  <section
+    id="screen-gender-age"
+    class="screen hidden-screen flex items-center justify-center p-5"
+  >
+    <div class="w-full max-w-md">
+
+      <div class="bg-white rounded-3xl shadow-xl p-6">
+
+        <div class="text-center mb-7">
+          <div class="text-blue-600 text-4xl mb-3">
+            <i class="fa-solid fa-user"></i>
+          </div>
+
+          <h2 class="text-2xl font-bold">
+            Tell us about yourself
+          </h2>
+
+          <p class="text-gray-500 text-sm mt-2">
+            This information is shown with your profile.
+          </p>
         </div>
 
-        <button onclick="finishOnboarding()" class="w-full bg-white text-black font-bold py-3 rounded-xl hover:bg-gray-200 transition">
-            Continue to Chat <i class="fa-solid fa-check ml-2"></i>
+        <label class="font-semibold text-gray-800">
+          Gender
+        </label>
+
+        <div class="grid grid-cols-2 gap-3 mt-3">
+
+          <button
+            id="maleBtn"
+            onclick="selectGender('Male')"
+            class="gender-card border-2 border-gray-200 rounded-2xl p-4"
+          >
+            <i class="fa-solid fa-mars text-blue-500 text-2xl"></i>
+            <div class="font-semibold mt-2">Male</div>
+          </button>
+
+          <button
+            id="femaleBtn"
+            onclick="selectGender('Female')"
+            class="gender-card border-2 border-gray-200 rounded-2xl p-4"
+          >
+            <i class="fa-solid fa-venus text-pink-500 text-2xl"></i>
+            <div class="font-semibold mt-2">Female</div>
+          </button>
+
+        </div>
+
+        <div class="mt-7">
+
+          <div class="flex justify-between items-center">
+            <label class="font-semibold">
+              Age
+            </label>
+
+            <span
+              id="ageValue"
+              class="bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-full"
+            >
+              18
+            </span>
+          </div>
+
+          <input
+            id="ageSlider"
+            type="range"
+            min="13"
+            max="80"
+            value="18"
+            class="w-full mt-5"
+            oninput="updateAge()"
+          />
+
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>13</span>
+            <span>80</span>
+          </div>
+
+        </div>
+
+        <button
+          onclick="goToNameScreen()"
+          class="w-full mt-8 bg-blue-600 text-white rounded-2xl py-4 font-bold hover:bg-blue-700 transition"
+        >
+          Continue
+          <i class="fa-solid fa-arrow-right ml-2"></i>
         </button>
+
+      </div>
     </div>
+  </section>
 
-    <!-- ==================== SCREEN 4: CHAT INTERFACE ==================== -->
-    <div id="screen-chat" class="flex-1 flex flex-col w-full hidden">
-        
-        <!-- TOP NAV HEADER -->
-        <nav class="bg-[#111b21] sticky top-0 z-40 px-4 py-3 border-b border-[#222d34] flex flex-col items-center justify-center shadow-sm">
-            <h1 class="text-white font-extrabold text-xl tracking-wide">DCP Confession page</h1>
-            <span class="text-[11px] text-gray-400 font-semibold">Owner: Default</span>
-        </nav>
 
-        <!-- CHAT MESSAGES CONTAINER -->
-        <div class="flex-1 max-w-md w-full mx-auto px-4 pt-4 pb-36">
-            <div id="chat-stream" class="space-y-4">
-                <div class="text-center py-8 text-gray-400 text-sm">Loading group chat...</div>
-            </div>
+  <!-- ========================================================= -->
+  <!-- NAME SCREEN -->
+  <!-- ========================================================= -->
+
+  <section
+    id="screen-name"
+    class="screen hidden-screen flex items-center justify-center p-5"
+  >
+    <div class="w-full max-w-md">
+
+      <div class="bg-white rounded-3xl shadow-xl p-6">
+
+        <div class="text-center mb-7">
+          <div class="text-blue-600 text-4xl mb-3">
+            <i class="fa-solid fa-id-card"></i>
+          </div>
+
+          <h2 class="text-2xl font-bold">
+            What's your name?
+          </h2>
+
+          <p class="text-gray-500 text-sm mt-2">
+            Use your real name so the community stays genuine.
+          </p>
         </div>
 
-        <!-- FIXED INPUT & 5-BOX BOTTOM NAV -->
-        <div class="fixed bottom-0 left-0 right-0 z-50 bg-[#111b21] border-t border-[#222d34]">
-            
-            <!-- Chat Input Box -->
-            <div class="max-w-md mx-auto px-3 py-2 flex items-center gap-2">
-                <div class="flex-1 bg-gray-800 border border-gray-600 rounded-2xl px-4 py-2.5 flex items-center">
-                    <input id="chat-input" type="text" placeholder="Message..." class="w-full bg-transparent text-base text-white font-medium focus:outline-none placeholder-gray-400">
-                </div>
-                <button id="btn-send" class="bg-white text-black px-4 py-2.5 rounded-2xl font-bold">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
-            </div>
+        <input
+          id="nameInput"
+          type="text"
+          maxlength="40"
+          autocomplete="name"
+          placeholder="Enter your real name"
+          class="w-full border border-gray-200 rounded-2xl px-4 py-4 outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-            <!-- 5-BOX BOTTOM NAVIGATION -->
-            <div class="bottom-nav">
-                <div class="max-w-md mx-auto grid grid-cols-5 border-t border-[#222d34] text-center text-white font-bold">
-                    
-                    <!-- Box 1: Me -->
-                    <button onclick="openModal('me-modal')" class="py-2 border-r border-[#222d34] hover:bg-gray-800 flex flex-col items-center justify-center">
-                        <span class="text-sm">Me</span>
-                    </button>
-
-                    <!-- Box 2: Personal -->
-                    <button onclick="openModal('personal-modal')" class="py-2 border-r border-[#222d34] hover:bg-gray-800 flex flex-col items-center justify-center">
-                        <span class="text-[10px] leading-tight">Personal</span>
-                        <span class="text-xs">...</span>
-                    </button>
-
-                    <!-- Box 3: Active Users -->
-                    <div class="py-2 border-r border-[#222d34] flex flex-col items-center justify-center">
-                        <div class="flex items-center space-x-1">
-                            <span class="text-[10px] leading-tight">User active</span>
-                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                        </div>
-                        <span id="active-user-count" class="text-sm">1</span>
-                    </div>
-
-                    <!-- Box 4: Setting -->
-                    <button onclick="openModal('settings-modal')" class="py-2 border-r border-[#222d34] hover:bg-gray-800 flex flex-col items-center justify-center">
-                        <span class="text-sm">Setting</span>
-                        <span class="text-xs">O</span>
-                    </button>
-
-                    <!-- Box 5: Notice -->
-                    <button onclick="openModal('notice-modal')" class="py-2 hover:bg-gray-800 flex flex-col items-center justify-center">
-                        <span class="text-sm">Notice</span>
-                    </button>
-
-                </div>
-            </div>
-
+        <div class="mt-3 p-3 rounded-xl bg-amber-50 text-amber-700 text-sm">
+          <i class="fa-solid fa-triangle-exclamation mr-1"></i>
+          Please don't use fake or offensive names.
         </div>
 
+        <div id="nameError"
+          class="hidden mt-3 p-3 rounded-xl bg-red-50 text-red-700 text-sm">
+        </div>
+
+        <button
+          id="finishBtn"
+          onclick="finishOnboarding()"
+          class="w-full mt-6 bg-blue-600 text-white rounded-2xl py-4 font-bold hover:bg-blue-700 transition"
+        >
+          Enter DCP Confession
+        </button>
+
+      </div>
     </div>
+  </section>
 
-    <!-- ==================== MODALS ==================== -->
 
-    <!-- Me Modal -->
-    <div id="me-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-gray-900 border border-gray-700 text-white rounded-2xl p-5 w-full max-w-xs text-center relative shadow-2xl">
-            <button onclick="closeModal('me-modal')" class="absolute top-3 right-3 text-gray-400 hover:text-white font-bold"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 class="text-base font-bold text-white mb-3"><i class="fa-solid fa-user text-white mr-2"></i>My Profile</h3>
+  <!-- ========================================================= -->
+  <!-- CHAT SCREEN -->
+  <!-- ========================================================= -->
 
-            
+  <section
+    id="screen-chat"
+    class="screen hidden-screen flex flex-col bg-gray-50"
+  >
+
+    <!-- TOP BAR -->
+    <header class="sticky top-0 z-30 glass border-b border-gray-200">
+
+      <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+
+        <div>
+          <h1 class="font-black text-lg">
+            DCP Confession page
+          </h1>
+
+          <div class="flex items-center gap-2 text-xs text-gray-500 mt-1">
+            <span id="headerUserName">User</span>
+            <span>•</span>
+            <span id="headerUserInfo">Male, 18</span>
+          </div>
+        </div>
+
+        <button
+          onclick="openProfileModal()"
+          class="w-11 h-11 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"
+        >
+          <i class="fa-solid fa-user"></i>
+        </button>
+
+      </div>
+    </header>
+
+
+    <!-- MESSAGES -->
+    <main
+      id="messages"
+      class="flex-1 overflow-y-auto px-3 py-5 pb-28"
+    >
+
+      <div
+        id="chatLoading"
+        class="flex
